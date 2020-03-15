@@ -1,0 +1,19 @@
+{
+  "name": "zipline",
+  "version": "0.1.0",
+  "description": "Microservice to zip and download files from Github",
+  "main": "index.js",
+  "scripts": {
+    "start": "micro",
+    "dev": "micro-dev"
+  },
+  "author": "JT",
+  "license": "MIT",
+  "dependencies": {
+    "archiver": "^3.1.1",
+    "micro": "^9.3.4"
+  },
+  "devDependencies": {
+    "micro-dev": "^3.0.0"
+  }
+}
