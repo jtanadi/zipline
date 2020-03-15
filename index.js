@@ -20,17 +20,20 @@ module.exports = async (req, res) => {
 
     // Will throw Error if check fails
     const query = qs.parse(req.url.split("?")[1]);
+    const { user, repo, branch, file } = query;
 
     const archive = archiver("zip", { zlib: { level: 9 } });
     archive.pipe(res);
 
-    for (let i = 0; i < query["user"].length; i++) {
-      const user = query["user"][i];
-      const repo = query["repo"][i];
-      const file = query["file"][i];
-      const url = `https://raw.githubusercontent.com/${user}/${repo}/master/${file}`;
-      await fetchAndZip(url, archive, file);
+    for (let i = 0; i < user.length; i++) {
+      const _user = user[i];
+      const _repo = repo[i];
+      const _branch = branch[i];
+      const _file = file[i];
+      const url = `https://raw.githubusercontent.com/${_user}/${_repo}/${_branch}/${_file}`;
+      await fetchAndZip(url, archive, _file);
     }
+
     archive.finalize();
   } catch (e) {
     send(res, e.statusCode, e.message);
