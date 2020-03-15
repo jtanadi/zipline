@@ -7,12 +7,6 @@ const makeError = require("./utils/makeError");
 const fetchAndZip = require("./utils/fetchAndZip");
 
 module.exports = async (req, res) => {
-  res.setHeader("Content-Type", "application/zip");
-  res.setHeader(
-    "Content-Disposition",
-    `attachment; filename=${downloadFileName}`
-  );
-
   try {
     if (req.method !== "GET") {
       throw makeError(400, "Only 'GET' is supported.");
@@ -26,6 +20,12 @@ module.exports = async (req, res) => {
     // Will throw Error if check fails
     const query = qs.parse(qString);
     const { user, repo, branch, file } = query;
+
+    res.setHeader("Content-Type", "application/zip");
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename=${downloadFileName}`
+    );
 
     const archive = archiver("zip", { zlib: { level: 9 } });
     archive.pipe(res);
@@ -41,6 +41,7 @@ module.exports = async (req, res) => {
 
     archive.finalize();
   } catch (e) {
+    res.setHeader("Content-Type", "application/json");
     send(res, e.statusCode, e.message);
   }
 };
