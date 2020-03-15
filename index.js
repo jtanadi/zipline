@@ -18,8 +18,13 @@ module.exports = async (req, res) => {
       throw makeError(400, "Only 'GET' is supported.");
     }
 
+    const [baseAddress, qString] = req.url.split("?");
+    if (!qString) {
+      throw makeError(400, "Must pass in query string");
+    }
+
     // Will throw Error if check fails
-    const query = qs.parse(req.url.split("?")[1]);
+    const query = qs.parse(qString);
     const { user, repo, branch, file } = query;
 
     const archive = archiver("zip", { zlib: { level: 9 } });
