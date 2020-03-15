@@ -1,4 +1,4 @@
-# ⚡️ zipline ⚡️
+# 🚠️ zipline 🚠️
 `zipline` is a microservice to zip and download files from Github.
 
 Downloaded & zipped files retain the folder structure of the source. Any request error will be logged in the file.
