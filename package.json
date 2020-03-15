@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "micro -l tcp://0.0.0.0:$PORT",
-    "dev:start": "micro",
+    "start:dev": "micro",
     "dev": "micro-dev"
   },
   "author": "JT",
