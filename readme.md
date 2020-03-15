@@ -1,6 +1,21 @@
 # ⚡️ zipline ⚡️
 `zipline` is a microservice to zip and download files from Github.
 
+Downloaded & zipped files retain the folder structure of the source. Any request error will be logged in the file.
+
+For example, if we were to try downloading `checkImages/checkImages.js` and `updateImages/updateImages.js`, and *the second file doesn't exist* (`404` error):
+```
+download.zip
+ |
+ |_ checkImages
+ |   |
+ |   |_ checkImages.js
+ |
+ |_ updateImages
+     |
+     |_ updateImages.js // File content: Error 404 downloading from source
+```
+
 ## API
 This service only has one endpoint (`/`) and only supports `GET`.
 ```
