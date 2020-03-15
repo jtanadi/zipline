@@ -17,17 +17,22 @@ download.zip
 ```
 
 ## API
-This service only has one endpoint (`/`) and only supports `GET`.
+This service only supports `GET`, has one endpoint (`/`), and uses a query string to search and fetch files.
 ```
 https://raa-zipline.herokuapp.com/?querystringhere
 ```
 
-To use, simply pass in the target `user`, `repo`, and `file` as a query string. For example, to download `checkImages/checkImages.jsx` from `raa-tools`'s `indd` repo:
+### Query String
+To use, simply pass in the target `user`, `repo`, and `file` as a query string.
+
+**Note:** Remember to escape forward slashes (as `%2F`) and spaces (`%20`).
+
+For example, to download `checkImages/checkImages.jsx` from `raa-tools`'s `indd` repo:
 ```
 /?user=raa-tools&repo=indd&file=checkImages%2FcheckImages.jsx
 ```
 
-Remember to escape forward slashes (as `%2F`) and spaces (`%20`).
+### Downloading Multiple Files
 
 When downloading multiple files, every file's `user` and `repo` must be specified:
 ```
