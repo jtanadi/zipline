@@ -1,4 +1,6 @@
 const qs = require("querystring");
+
+const makeError = require("./makeError");
 const { queryRequirements } = require("../config");
 
 class QueryString {
@@ -52,12 +54,11 @@ class QueryString {
   checkQuery(query) {
     let len;
     for (const qReq of this.queryReqs) {
-      const qLen = query[qReq].length;
-
       if (qReq !== "branch" && !query[qReq]) {
         throw makeError(400, `Missing '${qReq}' query key/value pair.`);
       }
 
+      const qLen = query[qReq].length;
       if (len && len !== qLen) {
         throw makeError(
           400,
