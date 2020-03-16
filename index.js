@@ -1,10 +1,10 @@
 const archiver = require("archiver");
 const { send } = require("micro");
 
-const { downloadFileName } = require("./config");
 const qs = require("./utils/querystring");
 const makeError = require("./utils/makeError");
 const fetchAndZip = require("./utils/fetchAndZip");
+const getDateTime = require("./utils/getDateTime");
 
 module.exports = async (req, res) => {
   try {
@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
     res.setHeader("Content-Type", "application/zip");
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename=${downloadFileName}`
+      `attachment; filename=download-${getDateTime()}.zip`
     );
 
     const archive = archiver("zip", { zlib: { level: 9 } });
