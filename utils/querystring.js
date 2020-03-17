@@ -24,16 +24,20 @@ class QueryString {
       // Work with an actual JS object
       const q = { ...query };
 
-      // If user doesn't specify a specific key, inject key/value
       if (query[key]) return q;
 
-      q[key] = q.user.map(() => defaultVal);
+      // Use arbitrary key as counter
+      const k = Object.keys(q)[0]
+      q[key] = q[k].map(() => defaultVal);
       return q;
     };
   }
 
   parse(str) {
     const q = qs.parse(str);
+
+    // Make sure all required keys are there in the first place
+    this.checkKeys(q);
 
     const processedQuery = this.injectProp(
       "branch",
@@ -47,17 +51,23 @@ class QueryString {
       }, {})
     );
 
-    this.checkQuery(processedQuery);
+    // Make sure we have the same number of values per key
+    this.checkValueLenghts(processedQuery);
+
     return processedQuery;
   }
 
-  checkQuery(query) {
-    let len;
+  checkKeys(query) {
     for (const qReq of this.queryReqs) {
       if (qReq !== "branch" && !query[qReq]) {
         throw makeError(400, `Missing '${qReq}' query key/value pair.`);
       }
+    }
+  }
 
+  checkValueLenghts(query) {
+    let len;
+    for (const qReq of this.queryReqs) {
       const qLen = query[qReq].length;
       if (len && len !== qLen) {
         throw makeError(
