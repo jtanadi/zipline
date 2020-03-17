@@ -12,9 +12,11 @@ module.exports = async (req, res) => {
       throw makeError(400, "Only 'GET' is supported.");
     }
 
-    const [baseAddress, qString] = req.url.split("?");
-    if (!qString) {
-      throw makeError(400, "Must pass in query string");
+    const [baseURL, qString] = req.url.split("?");
+    if (baseURL !== "/get") {
+      throw makeError(404, `Endpoint '${baseURL}' unavailable. Must use '/get'.`)
+    } else if (!qString) {
+      throw makeError(400, "Must pass in query string.");
     }
 
     // Will throw Error if check fails
