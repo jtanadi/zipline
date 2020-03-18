@@ -36,8 +36,16 @@ For example, to download `checkImages/checkImages.jsx` from `raa-tools`'s `indd`
 /get?user=raa-tools&repo=indd&file=checkImages%2FcheckImages.jsx
 ```
 
-### Downloading Multiple Files
+#### File ID
+By default, the generated `.zip` file is timestamped on creation to create a unique file name for the client. `zipline` uses UTC in the format `yyyymmddhhmmss`. However, it's possible for the client to pass in an arbitrary `id` query to override the feature.
 
+For example, the following query:
+```
+/get?user=raa-tools&repo=indd&file=checkImages%2FcheckImages.jsx&id=12345
+```
+will return `download-12345.zip`.
+
+### Downloading Multiple Files
 When downloading multiple files, every file's `user` and `repo` must be specified:
 ```
 /get?user=raa-tools&repo=indd&file=checkImages%2FcheckImages.jsx&user=raa-tools&repo=indd&file=batchConvert%2FbatchConvert.jsxbin
