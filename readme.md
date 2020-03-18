@@ -1,4 +1,8 @@
-# 🚠️ zipline 🚠️
+<div align="center">
+    <img src="./docs/zippie-01.png" alt="zippie illustration" height="400">
+    <h1>🚠️ zipline 🚠️</h1>
+</div>
+
 `zipline` is a microservice to zip and download files from Github.
 
 Downloaded & zipped files retain the folder structure of the source. Any request error will be logged in the file.
