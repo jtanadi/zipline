@@ -24,13 +24,13 @@ module.exports = async (req, res) => {
 
     // Will throw Error if check fails
     const query = qs.parse(qString);
-    const { user, repo, branch, file, time } = query;
+    const { user, repo, branch, file, id } = query;
 
-    const timestamp = time ? time : getDateTime();
+    const fileID = id || getDateTime();
     res.setHeader("Content-Type", "application/zip");
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename=download-${timestamp}.zip`
+      `attachment; filename=download-${fileID}.zip`
     );
 
     const archive = archiver("zip", { zlib: { level: 9 } });
