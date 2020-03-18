@@ -14,19 +14,23 @@ module.exports = async (req, res) => {
 
     const [baseURL, qString] = req.url.split("?");
     if (baseURL !== "/get") {
-      throw makeError(404, `Endpoint '${baseURL}' unavailable. Must use '/get'.`)
+      throw makeError(
+        404,
+        `Endpoint '${baseURL}' unavailable. Must use '/get'.`
+      );
     } else if (!qString) {
       throw makeError(400, "Must pass in query string.");
     }
 
     // Will throw Error if check fails
     const query = qs.parse(qString);
-    const { user, repo, branch, file } = query;
+    const { user, repo, branch, file, time } = query;
 
+    const timestamp = time ? time : getDateTime();
     res.setHeader("Content-Type", "application/zip");
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename=download-${getDateTime()}.zip`
+      `attachment; filename=download-${timestamp}.zip`
     );
 
     const archive = archiver("zip", { zlib: { level: 9 } });
