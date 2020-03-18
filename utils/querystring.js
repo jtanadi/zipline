@@ -27,7 +27,7 @@ class QueryString {
       if (query[key]) return q;
 
       // Use arbitrary key as counter
-      const k = Object.keys(q)[0]
+      const k = Object.keys(q)[0];
       q[key] = q[k].map(() => defaultVal);
       return q;
     };
@@ -44,7 +44,9 @@ class QueryString {
       "master"
     )(
       Object.keys(q).reduce((acc, key) => {
-        if (!Array.isArray(q[key])) {
+        if (key === "time") {
+          return { ...acc, time };
+        } else if (!Array.isArray(q[key])) {
           return { ...acc, [key]: [q[key]] };
         }
         return { ...acc, [key]: [...q[key]] };
