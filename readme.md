@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="./docs/zippie-01.png" alt="zippie illustration" height="400">
+    <img src="./docs/zippie-01.png" alt="zippie illustration" height="300">
     <h1>🚠️ zipline 🚠️</h1>
 </div>
 
