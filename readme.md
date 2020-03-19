@@ -36,7 +36,7 @@ For example, to download `checkImages/checkImages.jsx` from `raa-tools`'s `indd`
 /get?user=raa-tools&repo=indd&file=checkImages%2FcheckImages.jsx
 ```
 
-#### File ID
+### File ID
 By default, the generated `.zip` file is timestamped on creation to create a unique file name for the client. `zipline` uses UTC in the format `yyyymmddhhmmss`. However, it's possible for the client to pass in an arbitrary `id` query parameter to override the feature.
 
 For example, the following query:
