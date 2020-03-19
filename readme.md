@@ -27,7 +27,7 @@ https://raa-zipline.herokuapp.com/get?querystringhere
 ```
 
 ### Query String
-To use, simply pass in the target **`user`**, **`repo`**, and **`file`** as keys of the query string.
+To use, simply pass in the target **`user`**, **`repo`**, and **`file`** as parameters of the query string.
 
 **Note:** Remember to escape forward slashes (as `%2F`) and spaces (`%20`).
 
@@ -37,7 +37,7 @@ For example, to download `checkImages/checkImages.jsx` from `raa-tools`'s `indd`
 ```
 
 #### File ID
-By default, the generated `.zip` file is timestamped on creation to create a unique file name for the client. `zipline` uses UTC in the format `yyyymmddhhmmss`. However, it's possible for the client to pass in an arbitrary `id` query to override the feature.
+By default, the generated `.zip` file is timestamped on creation to create a unique file name for the client. `zipline` uses UTC in the format `yyyymmddhhmmss`. However, it's possible for the client to pass in an arbitrary `id` query parameter to override the feature.
 
 For example, the following query:
 ```
