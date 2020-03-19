@@ -18,17 +18,15 @@ class QueryString {
     this.queryReqs = queryReqs;
   }
 
-  injectProp(key, defaultVal = "") {
+  injectParam(param, defaultVal = "") {
     // This method needs to be curried
     return query => {
       // Work with an actual JS object
       const q = { ...query };
 
-      if (query[key]) return q;
+      if (query[param]) return q;
 
-      // Use arbitrary key as counter
-      const k = Object.keys(q)[0]
-      q[key] = q[k].map(() => defaultVal);
+      q[param] = q.user.map(() => defaultVal);
       return q;
     };
   }
@@ -36,31 +34,33 @@ class QueryString {
   parse(str) {
     const q = qs.parse(str);
 
-    // Make sure all required keys are there in the first place
-    this.checkKeys(q);
+    // Make sure all required params are there in the first place
+    this.checkParams(q);
 
-    const processedQuery = this.injectProp(
+    const processedQuery = this.injectParam(
       "branch",
       "master"
     )(
-      Object.keys(q).reduce((acc, key) => {
-        if (!Array.isArray(q[key])) {
-          return { ...acc, [key]: [q[key]] };
+      Object.keys(q).reduce((acc, param) => {
+        if (param === "id") {
+          return { ...acc, [param]: q[param] };
+        } else if (!Array.isArray(q[param])) {
+          return { ...acc, [param]: [q[param]] };
         }
-        return { ...acc, [key]: [...q[key]] };
+        return { ...acc, [param]: [...q[param]] };
       }, {})
     );
 
-    // Make sure we have the same number of values per key
+    // Make sure we have the same number of values per param
     this.checkValueLenghts(processedQuery);
 
     return processedQuery;
   }
 
-  checkKeys(query) {
+  checkParams(query) {
     for (const qReq of this.queryReqs) {
       if (qReq !== "branch" && !query[qReq]) {
-        throw makeError(400, `Missing '${qReq}' query key/value pair.`);
+        throw makeError(400, `Missing '${qReq}' query parameter/value pair.`);
       }
     }
   }
@@ -72,7 +72,7 @@ class QueryString {
       if (len && len !== qLen) {
         throw makeError(
           400,
-          `Problem with '${qReq}'. Each query key must have the same amount of values.`
+          `Problem with '${qReq}'. Each query parameter must have the same amount of values.`
         );
       } else {
         len = qLen;

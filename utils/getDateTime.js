@@ -4,12 +4,12 @@ const padTime = time => {
 
 module.exports = () => {
   const d = new Date();
-  const year = "".slice.call(d.getFullYear(), 2);
-  const month = padTime(d.getMonth() + 1);
-  const date = padTime(d.getDate());
-  const hours = padTime(d.getHours());
-  const min = padTime(d.getMinutes());
-  const secs = padTime(d.getSeconds());
+  const year = "".slice.call(d.getUTCFullYear(), 2);
+  const month = padTime(d.getUTCMonth() + 1);
+  const date = padTime(d.getUTCDate());
+  const hours = padTime(d.getUTCHours());
+  const min = padTime(d.getUTCMinutes());
+  const secs = padTime(d.getUTCSeconds());
 
   return `${year}${month}${date}-${hours}${min}${secs}`;
 };
