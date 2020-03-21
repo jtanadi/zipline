@@ -3,6 +3,8 @@
     <h1>🚠️ zipline 🚠️</h1>
 </div>
 
+![travis-ci](https://travis-ci.com/raa-tools/zipline.svg?branch=master)
+
 `zipline` is a microservice to zip and download files from GitHub.
 
 Downloaded & zipped files retain the folder structure of the source. Any request error will be logged in the file.
