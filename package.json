@@ -4,6 +4,8 @@
   "description": "Microservice to zip and download files from Github",
   "main": "index.js",
   "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
     "start": "micro -l tcp://0.0.0.0:$PORT",
     "start:dev": "micro",
     "dev": "micro-dev"
@@ -15,6 +17,7 @@
     "micro": "^9.3.4"
   },
   "devDependencies": {
+    "jest": "^25.1.0",
     "micro-dev": "^3.0.0"
   }
 }
