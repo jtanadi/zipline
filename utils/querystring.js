@@ -58,25 +58,37 @@ class QueryString {
   }
 
   checkParams(query) {
+    const missing = [];
     for (const qReq of this.queryReqs) {
       if (qReq !== "branch" && !query[qReq]) {
-        throw makeError(400, `Missing '${qReq}' query parameter/value pair.`);
+        missing.push(`'${qReq}'`);
       }
+    }
+
+    if (missing.length) {
+      const missingQs = missing.join(", ");
+      throw makeError(400, `Missing ${missingQs} query parameter(s).`);
     }
   }
 
   checkValueLengths(query) {
     let len;
+    const missing = [];
     for (const qReq of this.queryReqs) {
       const qLen = query[qReq].length;
       if (len && len !== qLen) {
-        throw makeError(
-          400,
-          `Problem with '${qReq}'. Each query parameter must have the same amount of values.`
-        );
+        missing.push(`'${qReq}'`);
       } else {
         len = qLen;
       }
+    }
+
+    if (missing.length) {
+      const missingQs = missing.join(", ");
+      throw makeError(
+        400,
+        `Missing ${missingQs}. Each query parameter must have the same number of values.`
+      );
     }
   }
 }
