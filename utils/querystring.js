@@ -52,7 +52,7 @@ class QueryString {
     );
 
     // Make sure we have the same number of values per param
-    this.checkValueLenghts(processedQuery);
+    this.checkValueLengths(processedQuery);
 
     return processedQuery;
   }
@@ -65,7 +65,7 @@ class QueryString {
     }
   }
 
-  checkValueLenghts(query) {
+  checkValueLengths(query) {
     let len;
     for (const qReq of this.queryReqs) {
       const qLen = query[qReq].length;
