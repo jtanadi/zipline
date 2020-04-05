@@ -1,4 +1,5 @@
 const archiver = require("archiver");
+const cors = require("micro-cors")();
 const { send } = require("micro");
 
 const qs = require("./utils/querystring");
@@ -6,7 +7,7 @@ const makeError = require("./utils/makeError");
 const fetchAndZip = require("./utils/fetchAndZip");
 const getDateTime = require("./utils/getDateTime");
 
-module.exports = async (req, res) => {
+const handler = async (req, res) => {
   try {
     if (req.method !== "GET") {
       throw makeError(400, "Only 'GET' is supported.");
@@ -55,3 +56,5 @@ module.exports = async (req, res) => {
     send(res, e.statusCode, e.message);
   }
 };
+
+module.exports = cors(handler);
