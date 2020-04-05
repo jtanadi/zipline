@@ -12,12 +12,12 @@ module.exports = async (req, res) => {
       throw makeError(400, "Only 'GET' is supported.");
     }
 
-    if (req.url === "/ping") {
-      return send(res, 200, { message: "OK" });
+    if (req.url === "/api/ping") {
+      return send(res, 204);
     }
 
     const [baseURL, qString] = req.url.split("?");
-    if (baseURL !== "/get") {
+    if (baseURL !== "/api/get") {
       throw makeError(
         404,
         `Endpoint '${baseURL}' unavailable. Must use '/ping' or '/get'.`
