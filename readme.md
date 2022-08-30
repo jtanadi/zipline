@@ -1,3 +1,6 @@
+# ARCHIVED AS OF AUGUST 30 2022
+Heroku is depreciating its free tier, so there is no host for this service.
+
 <div align="center">
     <img src="./docs/zippie-01.png" alt="zippie illustration" height="300">
     <h1>🚠️ zipline 🚠️</h1>
